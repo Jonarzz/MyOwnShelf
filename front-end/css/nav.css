@@ -45,7 +45,7 @@ a {
     -o-transition: all ease 0.25s;
     transition: all ease 0.25s; }
     .nav-inner__menu-button:hover {
-      box-shadow: inset 0 -60px 0 0 #cacaca; }
+      box-shadow: inset 0 -60px 0 0 lightgray; }
   .nav-inner__icons-container {
     position: absolute;
     display: table;
