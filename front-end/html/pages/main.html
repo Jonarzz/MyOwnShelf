@@ -1,7 +1,37 @@
-@@include('../components/head.html')
+<head>
+    @@include('../components/common-head.html')
+    @@include('../components/main-page-head.html')
+</head>
 <body>
     <header>
         @@include('../components/nav.html')
     </header>
-
+    <section class="feed">
+        @@include('../components/feed-post.html', {
+        "img" : "img/jd.jpg",
+        "username": "John Doe",
+        "text": "added <a href=\"#\">\"Salem's Lot\"</a> <a href=\"#\">(Stephen King)</a> to his library.",
+        "numberOfComments": 0,
+        "hour": "22:51",
+        "date": "29 June 2016"
+        })
+        @@include('../components/feed-post.html', {
+        "img" : "img/jd.jpg",
+        "username": "John Doe",
+        "text": "added <a href=\"#\">\"Salem's Lot\"</a> <a href=\"#\">(Stephen King)</a> to his library.",
+        "numberOfComments": 0,
+        "hour": "22:51",
+        "date": "29 June 2016"
+        })
+        <!--@@include('../components/feed-post.html', {-->
+            <!--"img" : "",-->
+            <!--"username": "Jane Doe",-->
+            <!--"text": "borrowed \"Harry Potter and the Prisoner of Azkaban\" (Joanne Kathleen Rowling) from John Doe.",-->
+            <!--"numberOfComments": 2,-->
+            <!--"hour": "21:14",-->
+            <!--"date": "29 June 2016"-->
+        <!--})-->
+    </section>
+    <aside class="side-panel">
+    </aside>
 </body>

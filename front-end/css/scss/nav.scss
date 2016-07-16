@@ -1,4 +1,5 @@
 @import "definitions";
+@import "util";
 
 body {
   background-color: $main-background-color;
@@ -15,17 +16,13 @@ nav {
   -webkit-box-align: center;
   -webkit-box-pack: center;
   display: -webkit-box;
-}
-
-a {
-  text-decoration: none;
+  border-bottom: 2px solid $nav-hover-background-color;
 }
 
 .nav-inner {
   max-width: $max-nav-width;
   width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 0 auto;
   position: relative;
 
   &__logo {
@@ -39,7 +36,6 @@ a {
   }
 
   &__menu-button {
-    font-family: $regular-font-family;
     font-size: 22px;
     color: $main-theme-color;
     @include stroke($main-stroke-color, 1px);

@@ -1,3 +1,13 @@
+* {
+  font-family: "Trirong", serif;
+  text-decoration: none !important; }
+
+a {
+  color: inherit; }
+
+.bold-text {
+  font-weight: bold; }
+
 body {
   background-color: #f4f4f4;
   margin: 0;
@@ -12,16 +22,13 @@ nav {
   overflow: hidden;
   -webkit-box-align: center;
   -webkit-box-pack: center;
-  display: -webkit-box; }
-
-a {
-  text-decoration: none; }
+  display: -webkit-box;
+  border-bottom: 2px solid lightgray; }
 
 .nav-inner {
   max-width: 1100px;
   width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 0 auto;
   position: relative; }
   .nav-inner__logo {
     font-family: "Rochester", cursive;
@@ -32,7 +39,6 @@ a {
     padding-bottom: 5px;
     display: table-cell; }
   .nav-inner__menu-button {
-    font-family: "Trirong", serif;
     font-size: 22px;
     color: #6d3b98;
     text-shadow: -1px 0 #eae7e0, 0 1px #eae7e0, 1px 0 #eae7e0, 0 -1px #eae7e0;

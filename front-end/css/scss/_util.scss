@@ -1,0 +1,12 @@
+@import "definitions";
+
+* {
+  font-family: $regular-font-family;
+  text-decoration: none !important;
+}
+a {
+  color: inherit;
+}
+.bold-text {
+  font-weight: bold;
+}

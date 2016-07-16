@@ -1,0 +1,68 @@
+@import "definitions";
+@import "util";
+
+.main-page-element {
+  margin-top: 80px;
+  display: inline-block;
+  vertical-align: top;
+}
+.feed {
+  @extend .main-page-element;
+  width: 56%;
+  margin-left: 9%;
+  padding-right: 15px;
+  border-right: 1px solid $separator-color;
+}
+.side-panel {
+  @extend .main-page-element;
+  margin-left: 15px;
+  width: 22.5%;
+}
+.feed-post {
+  background-color: $nav-background-color;
+  border: 1px $main-theme-color solid;
+  margin-bottom: 20px;
+
+  &__body {
+    display: inline-flex;
+    margin: 15px 0;
+    padding: 0 15px;
+  }
+
+  &__avatar {
+    display: inline-block;
+    border: 1px $main-theme-color solid;
+    height: 60px;
+  }
+
+  &__text {
+    display: inline-block;
+    font-size: 15px;
+    margin-top: 0px;
+    margin-left: 15px;
+  }
+
+  &__side {
+    margin: 15px 0;
+    border-spacing: 30px 0;
+    float: right;
+    border-left: 1px solid $separator-color;
+    display : table;
+  }
+
+  &__arrow {
+    color: $main-theme-color;
+    display : table-row !important;
+    float: right;
+    vertical-align : top;
+  }
+
+  &__date {
+    text-align: right;
+    font-size: 10px;
+    color: $main-theme-color;
+    display: table-row;
+    vertical-align: bottom;
+    margin: 0;
+  }
+}
