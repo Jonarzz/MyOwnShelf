@@ -1,8 +1,11 @@
 <head>
     <script src="https://use.fontawesome.com/b8f2bff788.js"></script>
+<script src="../js/lib/jquery-3.1.0.js"></script>
+<script src="../js/nav.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Rochester|Trirong" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../css/nav.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/main-page.css"/>
+    <script src="../js/main-page.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/main-page.css"/>
 </head>
 <body>
     <header>
@@ -12,52 +15,187 @@
         <a href="#" class="nav-inner__menu-button">My Library</a>
         <a href="#" class="nav-inner__menu-button">Friends</a>
         <div class="nav-inner__icons-container">
-            <form class="nav-inner__search-container" action="http://www.google.pl" autocomplete="off">
-                <input id="search-box" type="text" class="search-container__search-box"/>
-                <label for="search-box" class="search-container__search-button">
-                    <span href="#" class="fa fa-search fa-2x"></span>
-                </label>
-                <input type="submit" id="search-submit" tabindex="-1"/>
+            <form class="nav-inner__search-container" action="#" autocomplete="off">
+                <input id="nav-search-box" type="text" class="search-container__search-box" placeholder="Search">
+                <button class="search-container__search-button fa fa-search fa-2x" id="nav-search-button"></button>
             </form>
-            <a href="#" class="fa fa-bell fa-2x"></a>
-            <i href="#" class="fa fa-circle nav-inner__icon--circle nav-inner__icon--circle-ntf hidden"></i>
-            <a href="#" class="fa fa-envelope fa-2x"></a>
-            <i href="#" class="fa fa-circle nav-inner__icon--circle nav-inner__icon--circle-msg hidden"></i>
+            <a href="#" class="fa fa-bell fa-2x">
+                <i href="#" class="fa fa-circle nav-inner__icon--circle nav-inner__icon--circle-ntf hidden"></i></a>
+            <a href="#" class="fa fa-envelope fa-2x">
+                <i href="#" class="fa fa-circle nav-inner__icon--circle nav-inner__icon--circle-msg hidden"></i></a>
             <a href="#" class="fa fa-user fa-2x"></a>
         </div>
     </div>
 </nav>
     </header>
-    <section class="feed">
-        <article class="feed-post">
+    <section class="main-body">
+        <section class="feed">
+            <article class="feed-post">
     <div class="feed-post__body">
         <img src="img/jd.jpg" alt="John Doe avatar" class="feed-post__avatar">
-        <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+            
+                <p class="feed-post__comments-info">0 comments</p>
+            
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">22:51<br>29 November 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jdf.jpg" alt="Jane Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">Jane Doe</a> borrowed "Harry Potter and the Prisoner of Azkaban" (Joanne Kathleen Rowling) from John Doe.</p>
+            
+            
+                <a href="#" class="feed-post__comments-info">2 comments</a>
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">21:14<br>29 June 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jd.jpg" alt="John Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+            
+                <p class="feed-post__comments-info">0 comments</p>
+            
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">12:51<br>29 June 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jdf.jpg" alt="Jane Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">Jane Doe</a> borrowed "Harry Potter and the Prisoner of Azkaban" (Joanne Kathleen Rowling) from John Doe.</p>
+            
+            
+                <a href="#" class="feed-post__comments-info">2 comments</a>
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">21:14<br>28 June 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jd.jpg" alt="John Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+            
+                <p class="feed-post__comments-info">0 comments</p>
+            
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">21:11<br>26 June 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jdf.jpg" alt="Jane Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">Jane Doe</a> borrowed "Harry Potter and the Prisoner of Azkaban" (Joanne Kathleen Rowling) from John Doe.</p>
+            
+            
+                <a href="#" class="feed-post__comments-info">2 comments</a>
+            
+        </div>
+    </div>
+    <div class="feed-post__side">
+        <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
+        <p class="feed-post__date">21:14<br>29 June 2016</p>
+    </div>
+</article>
+            <article class="feed-post">
+    <div class="feed-post__body">
+        <img src="img/jd.jpg" alt="John Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+            
+                <p class="feed-post__comments-info">0 comments</p>
+            
+            
+        </div>
     </div>
     <div class="feed-post__side">
         <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
         <p class="feed-post__date">22:51<br>29 June 2016</p>
     </div>
 </article>
-        <article class="feed-post">
+            <article class="feed-post">
     <div class="feed-post__body">
-        <img src="img/jd.jpg" alt="John Doe avatar" class="feed-post__avatar">
-        <p class="feed-post__text"><a href="#" class="bold-text">John Doe</a> added <a href="#">"Salem's Lot"</a> <a href="#">(Stephen King)</a> to his library.</p>
+        <img src="img/jdf.jpg" alt="Jane Doe avatar" class="feed-post__avatar">
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">Jane Doe</a> borrowed "Harry Potter and the Prisoner of Azkaban" (Joanne Kathleen Rowling) from John Doe.</p>
+            
+            
+                <a href="#" class="feed-post__comments-info">2 comments</a>
+            
+        </div>
     </div>
     <div class="feed-post__side">
         <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>
-        <p class="feed-post__date">22:51<br>29 June 2016</p>
+        <p class="feed-post__date">21:14<br>29 June 2016</p>
     </div>
 </article>
-        
-            <!--"img" : "",-->
-            <!--"username": "Jane Doe",-->
-            <!--"text": "borrowed \"Harry Potter and the Prisoner of Azkaban\" (Joanne Kathleen Rowling) from John Doe.",-->
-            <!--"numberOfComments": 2,-->
-            <!--"hour": "21:14",-->
-            <!--"date": "29 June 2016"-->
-        <!--})-->
+        </section>
+        <aside class="side-panel">
+            <article class="side-element">
+    <p class="side-element__heading">Borrowed</p>
+    <div class="side-element__body">asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+    </div>
+</article>
+            <article class="side-element">
+    <p class="side-element__heading">Borrowed</p>
+    <div class="side-element__body">asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+    </div>
+</article>
+            <article class="side-element">
+    <p class="side-element__heading">Borrowed</p>
+    <div class="side-element__body">asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+        asdas dasd asd asd asd
+    </div>
+</article>
+        </aside>
     </section>
-    <aside class="side-panel">
-    </aside>
 </body>

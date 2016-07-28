@@ -9,7 +9,7 @@
  * 5. Go to: http://localhost:8080/
  */
 
-
+// TODO: minify js
 var gulp = require('gulp'),
     fileinclude = require('gulp-file-include'),
     sass = require('gulp-sass'),

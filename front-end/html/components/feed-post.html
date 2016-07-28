@@ -1,7 +1,15 @@
 <article class="feed-post">
     <div class="feed-post__body">
         <img src="@@img" alt="@@username avatar" class="feed-post__avatar">
-        <p class="feed-post__text"><a href="#" class="bold-text">@@username</a> @@text</p>
+        <div class="feed-post__body--inner">
+            <p class="feed-post__text"><a href="#" class="bold-text">@@username</a> @@text</p>
+            @@if (numberOfComments === 0) {
+                <p class="feed-post__comments-info">0 comments</p>
+            }
+            @@if (numberOfComments !== 0) {
+                <a href="#" class="feed-post__comments-info">@@numberOfComments comments</a>
+            }
+        </div>
     </div>
     <div class="feed-post__side">
         <a href="#" class="fa fa-sort-desc fa-lg feed-post__arrow"></a>

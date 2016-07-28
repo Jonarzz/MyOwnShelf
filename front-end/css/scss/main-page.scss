@@ -1,6 +1,14 @@
 @import "definitions";
 @import "util";
 
+.main-body {
+  max-width: $max-nav-width;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+}
 .main-page-element {
   margin-top: 80px;
   display: inline-block;
@@ -8,15 +16,22 @@
 }
 .feed {
   @extend .main-page-element;
-  width: 56%;
-  margin-left: 9%;
   padding-right: 15px;
   border-right: 1px solid $separator-color;
+  width: 66%;
+  float: left;
+}
+.separator {
+  @extend .main-page-element;
+  width: 1px;
+  height: 100%;
+  border-right: 1px solid $separator-color;
+  position: absolute;
 }
 .side-panel {
   @extend .main-page-element;
   margin-left: 15px;
-  width: 22.5%;
+  width: 31%;
 }
 .feed-post {
   background-color: $nav-background-color;
@@ -27,42 +42,109 @@
     display: inline-flex;
     margin: 15px 0;
     padding: 0 15px;
+    border-right: 1px solid $separator-color;
+    position: relative;
+    width: 75%;
+
+    &--inner {
+      width: 100%;;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
 
   &__avatar {
     display: inline-block;
     border: 1px $main-theme-color solid;
     height: 60px;
+    width: 60px;
   }
 
   &__text {
     display: inline-block;
-    font-size: 15px;
-    margin-top: 0px;
+    font-size: 14px;
+    margin-top: -5px;
     margin-left: 15px;
   }
 
+  &__comments-info {
+    color: $secondary-elements-color;
+    text-align: right;
+    font-size: 12px;
+    line-height: 12px;
+    padding-top: 5px;
+  }
+
   &__side {
-    margin: 15px 0;
-    border-spacing: 30px 0;
+    padding: 15px 20px 15px 0;
     float: right;
-    border-left: 1px solid $separator-color;
-    display : table;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 
   &__arrow {
-    color: $main-theme-color;
-    display : table-row !important;
-    float: right;
-    vertical-align : top;
+    color: $secondary-elements-color;
+    line-height: 0 !important;
   }
 
   &__date {
     text-align: right;
     font-size: 10px;
-    color: $main-theme-color;
-    display: table-row;
-    vertical-align: bottom;
-    margin: 0;
+    color: $secondary-elements-color;
+    line-height: 12px;
+  }
+}
+.side-element {
+  margin-bottom: 20px;
+
+  &__heading {
+    color: white;
+    @include stroke(black, 1px);
+    font-size: 20px;
+    background: $main-theme-color;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    -webkit-box-shadow: 0 8px 10px -8px black;
+    -moz-box-shadow: 0 8px 10px -8px black;
+    box-shadow: 0 8px 10px -8px black;
+
+    &--ribbon {
+      content: "";
+      position: absolute;
+      display: block;
+      border-style: solid;
+      bottom: -1em;
+      border-color: darken($main-theme-color, 15%) transparent transparent transparent;
+    }
+
+    &:before {
+      @extend .side-element__heading--ribbon;
+      left: 0;
+      border-width: 1em 0 0 1em;
+      z-index: -1;
+    }
+
+    &:after {
+      @extend .side-element__heading--ribbon;
+      right: 0;
+      border-width: 1em 1em 0 0;
+      z-index: -1;
+    }
+  }
+
+  &__body {
+    background: $nav-background-color;
+    border-left: 1px $main-theme-color solid;
+    border-bottom: 1px $main-theme-color solid;
+    border-right: 1px $main-theme-color solid;
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px 20px;
   }
 }

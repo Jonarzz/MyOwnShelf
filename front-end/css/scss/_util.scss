@@ -4,9 +4,19 @@
   font-family: $regular-font-family;
   text-decoration: none !important;
 }
+body {
+  padding-bottom: 20px;
+}
+h1, h2 {
+  font-weight: normal;
+  display: table-cell;
+}
 a {
   color: inherit;
 }
 .bold-text {
   font-weight: bold;
+}
+p {
+  margin: 0;
 }

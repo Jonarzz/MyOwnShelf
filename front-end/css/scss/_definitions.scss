@@ -3,14 +3,16 @@ $regular-font-family: 'Trirong', serif;
 $main-background-color: #f4f4f4;
 $nav-background-color: darken($main-background-color, 10%);
 $nav-hover-background-color: darken($nav-background-color, 3%);
+$nav-border: darken($nav-background-color, 10%);
 $main-theme-color: #6d3b98;
+$secondary-elements-color: lighten($main-theme-color, 15%);
 $separator-color: lighten($main-theme-color, 40%);
 $main-stroke-color: #eae7e0;
 $max-nav-width: 1100px;
 $basic-transition-time: 0.25s;
 
 $tablet-width: 768px;
-$desktop-width: 1024px;
+$desktop-width: 1050px;
 
 @mixin tablet {
   @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
