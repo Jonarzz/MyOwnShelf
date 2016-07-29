@@ -9,6 +9,7 @@ import re
 from datetime import datetime
 
 import grequests
+from fake_useragent import UserAgent
 from bs4 import BeautifulSoup, SoupStrainer
 
 import properties
@@ -39,7 +40,8 @@ def scrap_book_data():
      'cover_url': 'https://d.gr-assets.com/books/1447303603l/2767052.jpg',
     }
     """
-    for list_page_response in generate_responses(LIST_BASE_URL + str(x + 1) for x in range(2)):
+    page_responses = generate_responses(LIST_BASE_URL + str(x + 1) for x in range(NUMBER_OF_PAGES))
+    for list_page_response in page_responses:
         page_soup = BeautifulSoup(list_page_response.text, 'lxml', parse_only=SoupStrainer(class_='bookTitle'))
         responses = generate_responses(BASE_URL + tag['href'] for tag in page_soup.find_all('a'))
         for book_response in responses:
@@ -48,12 +50,13 @@ def scrap_book_data():
 
 def generate_responses(url_generator):
     """
-    Function used for asynchronous generation of responses from url generator.
+    Function used for asynchronous generation of responses with random user agent from url generator.
 
     :return: generator of responses
     """
-    requests_generator = (grequests.get(url) for url in url_generator)
-    return grequests.imap(requests_generator, stream=True, size=5)
+    ua = UserAgent()
+    requests_generator = (grequests.get(url, headers={'User-Agent': ua.random}) for url in url_generator)
+    return grequests.imap(requests_generator, size=5)
 
 
 def save_book_data_for_url(response):
@@ -166,14 +169,12 @@ def format_and_save_publish_info(date_match, publisher_match, book_dictionary):
     date_match = date_match.groups()
 
     if len(date_match) == 3:
-        publish_date = datetime.strptime(''.join(date_match), '%B%d%Y').date().isoformat()
+        book_dictionary['publish_date'] = datetime.strptime(''.join(date_match), '%B%d%Y').date().isoformat()
     elif len(date_match) == 2:
         date = datetime.strptime(''.join(date_match), '%B%Y').date()
-        publish_date = '-'.join([str(date.year), str(date.month).zfill(2)])
+        book_dictionary['publish_date'] = '-'.join([str(date.year), str(date.month).zfill(2)])
     elif len(date_match) == 1:
-        publish_date = date_match[0]
-
-    book_dictionary['publish_date'] = publish_date
+        book_dictionary['publish_date'] = date_match[0]
 
     if publisher_match:
         book_dictionary['published_by'] = publisher_match.group(1)
@@ -187,7 +188,7 @@ def clear_string(string_to_clear):
     :return: cleared string
     """
     string_to_clear = re.sub(u'\xa0+', r' ', string_to_clear)
-    string_to_clear = re.sub(r'\.(?! |\.|\n|\r)', r'. ', string_to_clear)
+    string_to_clear = re.sub(r'\.(?! |\.|\n|\r|$)', r'. ', string_to_clear)
     return string_to_clear
 
 
