@@ -120,10 +120,10 @@ def calculate_isbn10(isbn_13):
 
     :return: isbn_10
     """
-    digits = (x for x in isbn_13[3:-1])
+    digit_list = isbn_13[3:-1]
     multiplied_sum = 0
-    for x in range(1, 10):
-        multiplied_sum += int(next(digits)) * x
+    for index, digit in enumerate(digit_list, start=1):
+        multiplied_sum += index * int(digit)
 
     check_digit = multiplied_sum % 11
 
