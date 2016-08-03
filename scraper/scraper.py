@@ -1,6 +1,6 @@
 """
 Module used for obtaining data about books including: title, author, cover, number of pages,
-publication date and house, ISBN 10 and 13, edition language, book format, description and genres.
+publication date and house, ISBN 10 and 13, edition language, book format, description ,genres and series.
 
 The data is acquired from 'Best Books Ever' list from www.goodreads.com
 """
@@ -18,7 +18,7 @@ BASE_URL = 'https://www.goodreads.com'
 LIST_BASE_URL = 'https://www.goodreads.com/list/show/1.Best_Books_Ever?page='
 NUMBER_OF_PAGES = properties.determine_number_of_pages()
 LIST_OF_DICT_KEYS = ['title', 'author', 'pages', 'publish_date', 'published_by', 'edition_language', 'book_format',
-                     'ISBN10', 'ISBN13', 'description', 'genres', 'cover_url']
+                     'ISBN10', 'ISBN13', 'description', 'genres', 'cover_url', 'series']
 
 
 def scrap_book_data():
@@ -36,8 +36,9 @@ def scrap_book_data():
      'ISBN10': '0439023483'
      'ISBN13': '9780439023481'
      'description': '...',
-     'genres': ['Young Adult', 'Fiction', 'Science Fiction', 'Dystopia']
+     'genres': ['Young Adult', 'Fiction', 'Science Fiction', 'Dystopia'],
      'cover_url': 'https://d.gr-assets.com/books/1447303603l/2767052.jpg',
+     'series': {'The Hunger Games': '1'}
     }
     """
     page_responses = generate_responses(LIST_BASE_URL + str(x + 1) for x in range(NUMBER_OF_PAGES))
@@ -66,7 +67,9 @@ def save_book_data_for_url(response):
     book_data = {key: None for key in LIST_OF_DICT_KEYS}
     book_soup = BeautifulSoup(response.text, 'lxml')
 
-    book_data['title'] = next(book_soup.find(id='bookTitle').stripped_strings)
+    title_tag = book_soup.find(id='bookTitle')
+    if title_tag:
+        book_data['title'] = next(title_tag.stripped_strings)
 
     author_tag = book_soup.find('span', itemprop='name')
     if author_tag:
@@ -100,6 +103,13 @@ def save_book_data_for_url(response):
         for tag in genre_tags:
             if tag.string not in book_data['genres']:
                 book_data['genres'].append(tag.string)
+
+    series_tags = book_soup.find(id='bookDataBox').find_all(href=re.compile('/series/'))
+    if series_tags:
+        book_data['series'] = {}
+        for tag in series_tags:
+            match = re.match(r'^(.+?)(?: +#(.+))?$', tag.string).groups()
+            book_data['series'][match[0]] = match[1]
 
     description_tag = book_soup.find(id='description')
     if description_tag:
@@ -142,10 +152,10 @@ def scrap_publish_info(soup, book_dictionary):
 
     NOTE: the code was extracted to the separate function due to its extensive volume
     """
-    publish_info_tag = soup.find('div', class_='row')
+    publish_info_tag = soup.find('div', id='details').find_all('div', class_='row')
 
     if publish_info_tag:
-        publish_info = ' '.join(next(publish_info_tag.find_next_sibling().strings).split())
+        publish_info = ' '.join(next(publish_info_tag[-1].strings).split())
         publisher_match = re.search('by (.+$)', publish_info)
 
         date_regex_list = ['(\w+) (\d{1,2})\w{2} (\d{4})', '(?<=Published )([a-zA-Z]+) (\d{4})',
