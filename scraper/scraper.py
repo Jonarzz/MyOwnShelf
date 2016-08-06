@@ -1,6 +1,6 @@
 """
-Module used for obtaining data about books including: title, author, cover, number of pages,
-publication date and house, ISBN 10 and 13, edition language, book format, description ,genres and series.
+Module used for obtaining data about books including: title, original title, author, cover, number of pages,
+publication date and house, ISBN 10 and 13, edition language, book format, description, genres and series.
 
 The data is acquired from 'Best Books Ever' list from www.goodreads.com
 """
@@ -17,8 +17,8 @@ import properties
 BASE_URL = 'https://www.goodreads.com'
 LIST_BASE_URL = 'https://www.goodreads.com/list/show/1.Best_Books_Ever?page='
 NUMBER_OF_PAGES = properties.determine_number_of_pages()
-LIST_OF_DICT_KEYS = ['title', 'author', 'pages', 'publish_date', 'published_by', 'edition_language', 'book_format',
-                     'ISBN10', 'ISBN13', 'description', 'genres', 'cover_url', 'series']
+LIST_OF_DICT_KEYS = ['title', 'original_title', 'author', 'pages', 'publish_date', 'published_by', 'edition_language',
+                     'book_format', 'ISBN10', 'ISBN13', 'description', 'genres', 'cover_url', 'series']
 
 
 def scrap_book_data():
@@ -27,6 +27,7 @@ def scrap_book_data():
     The data for every book is yielded as a dictionary in the form of:
     {
      'title': 'The Hunger Games',
+     'original_title': 'The Hunger Games',
      'author': 'Suzanne Collins',
      'pages': 374,
      'publish_date': '2008-09-14',
@@ -66,10 +67,15 @@ def save_book_data_for_url(response):
     """
     book_data = {key: None for key in LIST_OF_DICT_KEYS}
     book_soup = BeautifulSoup(response.text, 'lxml')
+    book_data_box = book_soup.find('div', id='bookDataBox')
 
     title_tag = book_soup.find(id='bookTitle')
     if title_tag:
         book_data['title'] = next(title_tag.stripped_strings)
+
+    original_title_tag = book_data_box.find(class_='infoBoxRowTitle')
+    if original_title_tag.string == 'Original Title':
+        book_data['original_title'] = original_title_tag.find_next_sibling().string
 
     author_tag = book_soup.find('span', itemprop='name')
     if author_tag:
@@ -83,13 +89,13 @@ def save_book_data_for_url(response):
     if pages_tag:
         book_data['pages'] = int(pages_tag.string.split()[0])
 
-    isbn13_tag = book_soup.find(itemprop='isbn')
+    isbn13_tag = book_data_box.find(itemprop='isbn')
 
     if isbn13_tag and isbn13_tag.string.isdigit():
         book_data['ISBN13'] = isbn13_tag.string
         book_data['ISBN10'] = calculate_isbn10(isbn13_tag.string)
 
-    language_tag = book_soup.find('div', itemprop='inLanguage')
+    language_tag = book_data_box.find('div', itemprop='inLanguage')
     if language_tag:
         book_data['edition_language'] = language_tag.string
 
@@ -104,7 +110,7 @@ def save_book_data_for_url(response):
             if tag.string not in book_data['genres']:
                 book_data['genres'].append(tag.string)
 
-    series_tags = book_soup.find(id='bookDataBox').find_all(href=re.compile('/series/'))
+    series_tags = book_data_box.find_all(href=re.compile('/series/'))
     if series_tags:
         book_data['series'] = {}
         for tag in series_tags:
